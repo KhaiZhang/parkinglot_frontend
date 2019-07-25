@@ -53,6 +53,21 @@ export default new Vuex.Store({
           break;
       }
       state.parcelList.push(parcel); 
+    },
+    ensureReservation(state,parcel){
+      let updateParcel = state.parcelList.find(element  => element.id == parcel.id);
+      switch(updateParcel.status){
+        case 0 :
+          updateParcel.status = '未预约';
+          break;
+        case 1 :
+          paupdateParcelrcel.status = '已预约';
+          break;
+        case 2 :
+          updateParcel.status = '已取件';
+          break;
+      }
+      updateParcel.appointmentTime = parcel.appointmentTime; 
     }
 
   },
@@ -98,6 +113,16 @@ export default new Vuex.Store({
       .catch(function (error) {
         console.log(error);
       });
+    },
+    ensureReservation({commit},parcel){
+      axios.put("http://localhost:8090/parcels",parcel)
+          .then(function (response) {
+            console.log(response.data);
+            commit("ensureReservation",parcel)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
     
   }

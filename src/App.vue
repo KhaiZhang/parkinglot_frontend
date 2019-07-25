@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <BossHome></BossHome>
+    <router-view></router-view>
   </div>
 </template>
 

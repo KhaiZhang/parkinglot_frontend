@@ -21,7 +21,12 @@ export default {
   components: {
     ParcelList,
     SelectItem
-  }
+  },
+   mounted: function () {
+        this.$nextTick(function () {
+          this.$store.dispatch("getParcelList");
+      })
+    }
 }
 </script>
 

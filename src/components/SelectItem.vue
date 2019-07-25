@@ -7,6 +7,7 @@
         <span  class="select" @click="filterParcelList" id='token'>已取件</span>
         <span  class="select" @click="filterParcelList" id='unappointment'>未预约</span>
     </span>
+    <el-button type="primary" @click="navigateToReservation">预约取件</el-button>
   </div>
 </template>
 
@@ -44,8 +45,10 @@ export default {
         }
         else {
           this.$store.dispatch("getParcelListByStatus",status)
-        }
-        
+        }   
+      },
+    navigateToReservation:function(){
+          this.$router.push('/CustomHome');
       }
   }
 }

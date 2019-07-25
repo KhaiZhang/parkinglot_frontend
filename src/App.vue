@@ -1,12 +1,28 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <ParcelList></ParcelList>
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+
+import ParcelList from './views/ParcelList.vue'
+import axios from 'axios'
+export default {
+  name: 'app',
+  components: {
+    ParcelList
+  },
+  methods:{
+  },
+   mounted: function () {
+        this.$nextTick(function () {
+          this.$store.dispatch("getParcelList");
+      })
+    }
+}
+</script>
 
 <style lang="scss">
 #app {

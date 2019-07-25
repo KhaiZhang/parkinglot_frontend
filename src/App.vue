@@ -1,18 +1,18 @@
 <template>
   <div id="app">
-    <ParcelList></ParcelList>
+    <BossHome></BossHome>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
-import ParcelList from './views/ParcelList.vue'
+import BossHome from './views/BossHome.vue'
 import axios from 'axios'
+
 export default {
   name: 'app',
   components: {
-    ParcelList
+    BossHome
   },
   methods:{
   },

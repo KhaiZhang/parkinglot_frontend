@@ -26,6 +26,20 @@ export default new Vuex.Store({
             break;
         }   
       })
+    },
+    ensureParcelBeToken(state,item){
+      let parcel = state.parcelList.find(element  => element.id == item.id);
+      switch(item.status){
+        case 0 :
+          parcel.status = '未预约';
+          break;
+        case 1 :
+          parcel.status = '已预约';
+          break;
+        case 2 :
+          parcel.status = '已取件';
+          break;
+      } 
     }
 
   },
@@ -40,6 +54,18 @@ export default new Vuex.Store({
           .catch(function (error) {
             console.log(error);
           });
+    },
+    ensureParcelBeToken({commit},item){
+      item.status = 2;
+      axios.put("http://localhost:8090/parcels",item)
+          .then(function (response) {
+            console.log(response.data);
+            commit("ensureParcelBeToken",item)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
     }
+    
   }
 })

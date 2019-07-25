@@ -11,8 +11,6 @@ export default new Vuex.Store({
   mutations: {
     getParcelList(state,parcelList){
       state.parcelList = [];
-      console.log("mutations")
-      console.log(parcelList)
       state.parcelList.push(...parcelList);
       state.parcelList.map(parcel => {
         switch(parcel.status){
@@ -41,6 +39,20 @@ export default new Vuex.Store({
           parcel.status = '已取件';
           break;
       } 
+    },
+    addNewParcel(state,parcel){
+      switch(parcel.status){
+        case 0 :
+          parcel.status = '未预约';
+          break;
+        case 1 :
+          parcel.status = '已预约';
+          break;
+        case 2 :
+          parcel.status = '已取件';
+          break;
+      }
+      state.parcelList.push(parcel); 
     }
 
   },
@@ -76,7 +88,16 @@ export default new Vuex.Store({
           .catch(function (error) {
             console.log(error);
           });
-      
+    },
+    addNewParcel({commit} , parcel){
+      axios.post("http://localhost:8090/parcels",parcel)
+      .then(function (response) {
+        console.log(response.data);
+        commit("addNewParcel",response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
     
   }

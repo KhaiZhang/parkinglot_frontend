@@ -16,11 +16,6 @@ export default {
   },
   methods:{
   },
-   mounted: function () {
-        this.$nextTick(function () {
-          this.$store.dispatch("getParcelList");
-      })
-    }
 }
 </script>
 

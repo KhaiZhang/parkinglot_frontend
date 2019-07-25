@@ -10,6 +10,7 @@ export default new Vuex.Store({
   },
   mutations: {
     getParcelList(state,parcelList){
+      state.parcelList = [];
       console.log("mutations")
       console.log(parcelList)
       state.parcelList.push(...parcelList);
@@ -65,6 +66,17 @@ export default new Vuex.Store({
           .catch(function (error) {
             console.log(error);
           });
+    },
+    getParcelListByStatus({commit},status){
+        axios.get("http://localhost:8090/parcels/"+status)
+          .then(function (response) {
+            console.log(response.data);
+            commit("getParcelList",response.data)
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      
     }
     
   }
